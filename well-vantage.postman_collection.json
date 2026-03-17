@@ -1,0 +1,277 @@
+{
+  "info": {
+    "_postman_id": "226cb359-fe01-4cbc-b950-57c519522416",
+    "name": "well-vantage",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "504846"
+  },
+  "item": [
+    {
+      "name": "home",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Google Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"idToken\": \"qwe\",\r\n  \"email\":\"jamessekar007@gmail.com\",\r\n  \"name\":\"james sekar\",\r\n  \"providerAccountId\":\"12345\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/auth/google-login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "auth",
+            "google-login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create workouts",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"workout\": \"Beginner's Full Body - 5 Day\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/workouts",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "workouts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create workouts Plan",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"exercise\": \"Bench Press\",\r\n    \"sets\": 4,\r\n    \"reps\": 12,\r\n    \"workoutId\": 2\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/workout-plans",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "workout-plans"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Availability",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"sessionName\": \"Session\",\r\n  \"dates\": [\"2026-03-20\", \"2026-03-21\"],\r\n  \"timeSlots\": [\r\n    { \"startTime\": \"09:00\", \"endTime\": \"10:00\" },\r\n    { \"startTime\": \"11:00\", \"endTime\": \"12:00\" }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/availability",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "availability"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Availability",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/availability?date=2026-03-20",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "availability"
+          ],
+          "query": [
+            {
+              "key": "date",
+              "value": "2026-03-20"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get workouts Plan",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/workout-plans/2",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "workout-plans",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Workouts",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/workouts",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "workouts"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
