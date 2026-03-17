@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, HttpStatus, HttpException } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 
@@ -9,6 +9,15 @@ export class UsersController {
 
   @Post('google-login')
   signup(@Body() dto: CreateUserDto) {
-    return this.usersService.signup(dto);
-  }
+    try {
+            return this.usersService.signup(dto);
+        }
+    catch (error) {
+        console.error(error);
+    throw new HttpException(
+        { data: null, message: error.message || 'Failed to fetch workouts' },
+        HttpStatus.BAD_REQUEST,
+    );
+}
+}
 }

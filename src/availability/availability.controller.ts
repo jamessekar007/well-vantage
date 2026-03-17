@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Param, UseGuards, Query } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param, UseGuards, Query, HttpException, HttpStatus } from '@nestjs/common';
 import { AvailabilityService } from './availability.service';
 import { CreateAvailabilityDto } from './dto/create-availability.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -11,24 +11,43 @@ export class AvailabilityController {
   
   @UseGuards(JwtAuthGuard)
   @Post()
-  create(@CurrentUser() user: any,@Body() dto: CreateAvailabilityDto) {
-    return this.availabilityService.create(user.userId,dto);
+  async create(@CurrentUser() user: any,@Body() dto: CreateAvailabilityDto) {
+    try {
+
+     const availability = await this.availabilityService.create(user.userId,dto);
+    return {
+        data: availability,
+        message: 'Availability Added successfully',
+      };
+
+    }
+    catch (error) {
+            console.error(error);
+        throw new HttpException(
+            { data: null, message: error.message || 'Failed to fetch workouts' },
+            HttpStatus.BAD_REQUEST,
+        );
   }
+}
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  getUserAvailability(@CurrentUser() user: any,@Query('date') date?: string) {
-    return this.availabilityService.getUserAvailability(user.userId,date);
+  async getUserAvailability(@CurrentUser() user: any,@Query('date') date?: string) {
+     try {
+
+   const availability = await this.availabilityService.getUserAvailability(user.userId,date);
+    return {
+        data: availability,
+        message: 'Availability Fetched successfully',
+      };
+
+     }
+    catch (error) {
+            console.error(error);
+        throw new HttpException(
+            { data: null, message: error.message || 'Failed to fetch workouts' },
+            HttpStatus.BAD_REQUEST,
+        );
   }
-/*
-   @UseGuards(JwtAuthGuard)
-    @Post()
-    addWorkout(
-      @CurrentUser() user: any,
-      @Body('workout') workout: string
-    ) {
-      const userId = user.userId;
-      return this.workoutsService.addWorkout(userId, workout);
-    }
-      */
+  }
 }

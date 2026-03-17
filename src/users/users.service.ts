@@ -49,10 +49,12 @@ export class UsersService {
     console.log('Generated JWT Payload:', payload);
     const token = this.jwtService.sign(payload);
     return {
-      message: 'Logged In successfully',
-      access_token: token,
-      name: savedUser.name,
-      email: savedUser.email,
+        data: {
+            message: 'Logged In successfully',
+            access_token: token,
+            name: savedUser.name,
+            email: savedUser.email
+        }
     };
   }
   
